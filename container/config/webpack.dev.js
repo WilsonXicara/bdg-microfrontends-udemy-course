@@ -19,6 +19,10 @@ const devConfig = {
         // ALIAS: 'Marketing_ModuleFederationPlugin.name@HOST:PORT/Marketing_ModuleFederationPlugin.exposes[KEY_OF_FILE]'
         marketing: 'marketing@http://localhost:8081/remoteEntry.js',
       },
+      shared: [
+        'react',
+        'react-dom',
+      ],
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
