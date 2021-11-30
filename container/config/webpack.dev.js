@@ -7,17 +7,18 @@ const packageJson = require('../package.json');
 const devConfig = {
   mode: 'development',
   devServer: {
-    port: 8081,
+    port: 8080,
     historyApiFallback: {
       index: 'index.html',
     },
   },
   plugins: [
+    // Definir qué archivos se quieren obtener desde los remotes
     new ModuleFederationPlugin({
-      name: 'marketing',  // Nombre de la variable global que se creará al momento de cargar esta app
-      filename: 'remoteEntry.js',
-      exposes: {
-        './MarketingApp': './src/bootstrap',
+      name: 'container',  // Aplica solo para 'remotes'. Se agrega por convención
+      remotes: {
+        // ALIAS: 'Marketing_ModuleFederationPlugin.name@HOST:PORT/Marketing_ModuleFederationPlugin.exposes[KEY_OF_FILE]'
+        marketing: 'marketing@http://localhost:8081/remoteEntry.js',
       },
       shared: packageJson.dependencies,
     }),
