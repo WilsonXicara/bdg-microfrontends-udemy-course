@@ -1,11 +1,13 @@
 import React from 'react';
 
-import { mount as mountMarketingApp } from 'marketing/MarketingApp';
-
-console.log('>>>> container: mountMarketingApp=', mountMarketingApp);
+import { MarketingApp } from './components/remote-apps';
 
 export default () => {
   return (
-    <h1>Hi there!</h1>
+    <div>
+      <h1>Hi there!</h1>
+      <hr />
+      <MarketingApp />
+    </div>
   );
 };
