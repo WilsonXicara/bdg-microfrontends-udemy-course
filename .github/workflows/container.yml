@@ -1,0 +1,41 @@
+name: deploy-container
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push events but only for the master branch
+  push:
+    branches:
+      - master
+    paths:
+      # To specific only run this workflow when we make a change to something inside of container
+      - 'container/**'
+
+# Set our execution environment to inside of our container directory
+defaults:
+  run:
+    working-directory: container
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      # Download or install all dependencies into our project
+      - run: npm install
+      # Run our web, build process, generate the directory
+      - run: npm run build
+
+      # Deploy all these built files of to AWS 3
+      # @see https://www.udemy.com/course/microfrontend-course/learn/lecture/23207048#overview
+      - uses: chrislennon/action-aws-cli@v1.1
+      # 'dist' is the directory was created when we build our project
+      - run: aws s3 sync dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/container/latest
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
