@@ -9,6 +9,7 @@ const prodConfig = {
   mode: 'production',
   output: {
     filename: '[name].[contenthash].js',  // Temple to how to name the building files
+    publicPath: '/container/latest/',  // Added by plugin when trying to recover all compiled files
   },
   plugins: [
     // Definir qué archivos se quieren obtener desde los remotes
