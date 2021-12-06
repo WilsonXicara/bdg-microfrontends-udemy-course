@@ -1,13 +1,14 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 
 import { MarketingApp } from './components/remote-apps';
+import { Header } from './components';
 
 export default () => {
   return (
-    <div>
-      <h1>Hi there!!!!</h1>
-      <hr />
+    <BrowserRouter>
+      <Header />
       <MarketingApp />
-    </div>
+    </BrowserRouter>
   );
 };
