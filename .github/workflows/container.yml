@@ -30,6 +30,8 @@ jobs:
       - run: npm install
       # Run our web, build process, generate the directory
       - run: npm run build
+        env:
+          PRODUCTION_DOMAIN: ${{ secrets.PRODUCTION_DOMAIN }}
 
       # For fix error to execute GitHubActions:
       #   Error: Unable to process command '##[add-path]/opt/hostedtoolcache/aws/0.0.0/x64' successfully.
