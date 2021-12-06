@@ -42,7 +42,15 @@ jobs:
       # @see https://www.udemy.com/course/microfrontend-course/learn/lecture/23207048#overview
       - uses: chrislennon/action-aws-cli@v1.1
       # 'dist' is the directory was created when we build our project
+      # @see https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3/sync.html
       - run: aws s3 sync dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/container/latest
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      # Automatic invalidation step to build
+      # @see https://awscli.amazonaws.com/v2/documentation/api/latest/reference/cloudfront/create-invalidation.html
+      - run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} --paths "/container/latest/index.html"
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
