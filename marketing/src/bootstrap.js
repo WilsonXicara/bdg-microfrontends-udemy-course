@@ -1,24 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createMemoryHistory } from 'history';  // react-router-dom internally makes use of this library
+import { createMemoryHistory, createBrowserHistory } from 'history';  // react-router-dom internally makes use of this library
 
 import App from './App';
 
 // Mount function to start up the app
-const mount = (element, { onNavigate }) => {
-  const memoryHistory = createMemoryHistory();
+const mount = (element, { onNavigate, defaultHistory }) => {
+  const history = defaultHistory || createMemoryHistory();
   if (onNavigate) {
-    memoryHistory.listen(onNavigate);
+    history.listen(onNavigate);
   }
   ReactDOM.render(
-    <App history={memoryHistory} />,
+    <App history={history} />,
     element
   );
   return {
     onParentNavigate: ({ pathname: nextPathname }) => {
-      const { pathname: currentPathname } = memoryHistory.location;
+      const { pathname: currentPathname } = history.location;
       if (currentPathname !== nextPathname) {
-        memoryHistory.push(nextPathname);
+        history.push(nextPathname);
       }
     },
   };
@@ -29,7 +29,9 @@ if (process.env.NODE_ENV === 'development') {
   // Assuming our container doesn't have an element with id '_marketing-dev-root'
   const devRoot = document.querySelector('#_marketing-dev-root');
   if (devRoot) {
-    mount(devRoot, {});
+    mount(devRoot, {
+      defaultHistory: createBrowserHistory(),
+    });
   }
 }
 
