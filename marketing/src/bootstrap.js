@@ -5,8 +5,9 @@ import { createMemoryHistory } from 'history';  // react-router-dom internally m
 import App from './App';
 
 // Mount function to start up the app
-const mount = element => {
+const mount = (element, { onNavigate }) => {
   const memoryHistory = createMemoryHistory();
+  memoryHistory.listen(onNavigate)
   ReactDOM.render(
     <App history={memoryHistory} />,
     element
