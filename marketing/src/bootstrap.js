@@ -14,6 +14,14 @@ const mount = (element, { onNavigate }) => {
     <App history={memoryHistory} />,
     element
   );
+  return {
+    onParentNavigate: ({ pathname: nextPathname }) => {
+      const { pathname: currentPathname } = memoryHistory.location;
+      if (currentPathname !== nextPathname) {
+        memoryHistory.push(nextPathname);
+      }
+    },
+  };
 };
 
 // 1. If we are in development and in isolation, call mount immediately

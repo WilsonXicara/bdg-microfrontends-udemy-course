@@ -8,7 +8,7 @@ export default () => {
   const browserHistory = useHistory();
 
   useEffect(() => {
-    mount(ref.current, {
+    const { onParentNavigate } = mount(ref.current, {
       onNavigate: ({ pathname: nextPathname }) => {
         const { pathname: currentPathname } = browserHistory.location;
         if (currentPathname !== nextPathname) {
@@ -17,6 +17,7 @@ export default () => {
         }
       },
     });
+    browserHistory.listen(onParentNavigate);
   }, []);
 
   return <div ref={ref} />;
