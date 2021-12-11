@@ -7,15 +7,15 @@ const prodConfig = {
   mode: 'production',
   output: {
     filename: '[name].[contenthash].js',  // Temple to how to name the building files
-    publicPath: '/marketing/latest/',  // Added by plugin when trying to recover all compiled files
+    publicPath: '/auth/latest/',  // Added by plugin when trying to recover all compiled files
   },
   plugins: [
     // Definir qué archivos se quieren obtener desde los remotes
     new ModuleFederationPlugin({
-      name: 'marketing',  // Nombre de la variable global que se creará al momento de cargar esta app
+      name: 'auth',  // Nombre de la variable global que se creará al momento de cargar esta app
       filename: 'remoteEntry.js',
       exposes: {
-        './MarketingApp': './src/bootstrap',
+        './AuthApp': './src/bootstrap',
       },
       shared: packageJson.dependencies,
     }),
