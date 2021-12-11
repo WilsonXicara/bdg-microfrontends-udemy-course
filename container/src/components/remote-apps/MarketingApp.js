@@ -1,14 +1,20 @@
 import React, { useEffect, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { mount } from 'marketing/MarketingApp';
 
 export default () => {
   const ref = useRef(null);
+  const browserHistory = useHistory();
 
   useEffect(() => {
     mount(ref.current, {
-      onNavigate: (data) => {
-        console.log('>>>> container.MarketingApp: The container noticed navigation in Marketing, data=', data);
+      onNavigate: ({ pathname: nextPathname }) => {
+        const { pathname: currentPathname } = browserHistory.location;
+        if (currentPathname !== nextPathname) {
+          // To prevent infinite loop
+          browserHistory.push(nextPathname);
+        }
       },
     });
   }, []);
