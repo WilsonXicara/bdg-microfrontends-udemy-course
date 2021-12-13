@@ -23,6 +23,8 @@ const devConfig = {
       remotes: {
         // ALIAS: 'Marketing_ModuleFederationPlugin.name@HOST:PORT/Marketing_ModuleFederationPlugin.exposes[KEY_OF_FILE]'
         marketing: 'marketing@http://localhost:8081/remoteEntry.js',
+        // ALIAS: 'Auth_ModuleFederationPlugin.name@HOST:PORT/Auth_ModuleFederationPlugin.exposes[KEY_OF_FILE]'
+        auth: 'auth@http://localhost:8082/remoteEntry.js',
       },
       shared: packageJson.dependencies,
     }),
