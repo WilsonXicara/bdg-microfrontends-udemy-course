@@ -4,7 +4,7 @@ const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPl
 const commonConfig = require('./webpack.common');
 const packageJson = require('../package.json');
 
-const PORT = 8082;
+const PORT = 8083;
 
 const devConfig = {
   mode: 'development',
@@ -16,13 +16,17 @@ const devConfig = {
     historyApiFallback: {
       index: 'index.html',
     },
+    headers: {
+      // Se intentará cargar archivos de fuentes diferentes, y la carga de estos archivos está sujeta a la política de seguridad CORS
+      'Access-Control-Allow-Origin': '*',
+    },
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'auth',  // Nombre de la variable global que se creará al momento de cargar esta app
+      name: 'dashboard',  // Nombre de la variable global que se creará al momento de cargar esta app
       filename: 'remoteEntry.js',
       exposes: {
-        './AuthApp': './src/bootstrap',
+        './DashboardApp': './src/bootstrap',
       },
       shared: packageJson.dependencies,
     }),

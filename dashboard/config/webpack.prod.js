@@ -7,15 +7,15 @@ const prodConfig = {
   mode: 'production',
   output: {
     filename: '[name].[contenthash].js',  // Temple to how to name the building files
-    publicPath: '/auth/latest/',  // Added by plugin when trying to recover all compiled files
+    publicPath: '/dashboard/latest/',  // Added by plugin when trying to recover all compiled files
   },
   plugins: [
     // Definir qué archivos se quieren obtener desde los remotes
     new ModuleFederationPlugin({
-      name: 'auth',  // Nombre de la variable global que se creará al momento de cargar esta app
+      name: 'dashboard',  // Nombre de la variable global que se creará al momento de cargar esta app
       filename: 'remoteEntry.js',
       exposes: {
-        './AuthApp': './src/bootstrap',
+        './DashboardApp': './src/bootstrap',
       },
       shared: packageJson.dependencies,
     }),
