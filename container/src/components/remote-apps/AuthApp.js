@@ -17,6 +17,9 @@ export default () => {
           browserHistory.push(nextPathname);
         }
       },
+      onSignIn: () => {
+        console.log('>>>> container.AuthApp: User signed in');
+      },
     });
     browserHistory.listen(onParentNavigate);
   }, []);
