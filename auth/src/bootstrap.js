@@ -5,8 +5,10 @@ import { createMemoryHistory, createBrowserHistory } from 'history';  // react-r
 import App from './App';
 
 // Mount function to start up the app
-const mount = (element, { onNavigate, defaultHistory }) => {
-  const history = defaultHistory || createMemoryHistory();
+const mount = (element, { onNavigate, defaultHistory, initialPath }) => {
+  const history = defaultHistory || createMemoryHistory({
+    initialEntries: [initialPath],
+  });
   if (onNavigate) {
     history.listen(onNavigate);
   }
