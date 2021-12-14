@@ -1,39 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { createMemoryHistory, createBrowserHistory } from 'history';  // react-router-dom internally makes use of this library
+import { createApp } from 'vue';
 
-import App from './App';
+import { DashboardPage } from './pages';
 
 // Mount function to start up the app
-const mount = (element, { onNavigate, onSignIn, defaultHistory, initialPath }) => {
-  const history = defaultHistory || createMemoryHistory({
-    initialEntries: [initialPath],
-  });
-  if (onNavigate) {
-    history.listen(onNavigate);
-  }
-  ReactDOM.render(
-    <App history={history} onSignIn={onSignIn} />,
-    element
-  );
-  return {
-    onParentNavigate: ({ pathname: nextPathname }) => {
-      const { pathname: currentPathname } = history.location;
-      if (currentPathname !== nextPathname) {
-        history.push(nextPathname);
-      }
-    },
-  };
+const mount = (element) => {
+  const app = createApp(DashboardPage);
+  app.mount(element);
 };
 
 // 1. If we are in development and in isolation, call mount immediately
 if (process.env.NODE_ENV === 'development') {
-  // Assuming our container doesn't have an element with id '_auth-dev-root'
-  const devRoot = document.querySelector('#_auth-dev-root');
+  // Assuming our container doesn't have an element with id '_dashboard-dev-root'
+  const devRoot = document.querySelector('#_dashboard-dev-root');
   if (devRoot) {
-    mount(devRoot, {
-      defaultHistory: createBrowserHistory(),
-    });
+    mount(devRoot);
   }
 }
 
