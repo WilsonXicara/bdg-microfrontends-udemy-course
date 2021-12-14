@@ -19,8 +19,10 @@ const prodConfig = {
         // ALIAS: 'Marketing_ModuleFederationPlugin.name@HOST:PORT/Marketing_ModuleFederationPlugin.exposes[KEY_OF_FILE]'
         // Asumimos que los remoteEntry de las distintas app estarán en el mismo dominio pero en subcarpetas
         marketing: `marketing@${domain}/marketing/latest/remoteEntry.js`,
-        // ALIAS: 'Auth_ModuleFederationPlugin.name@HOST:PORT/Marketing_ModuleFederationPlugin.exposes[KEY_OF_FILE]'
+        // ALIAS: 'Auth_ModuleFederationPlugin.name@HOST:PORT/Auth_ModuleFederationPlugin.exposes[KEY_OF_FILE]'
         auth: `auth@${domain}/auth/latest/remoteEntry.js`,
+        // ALIAS: 'Dashboard_ModuleFederationPlugin.name@HOST:PORT/Dashboard_ModuleFederationPlugin.exposes[KEY_OF_FILE]'
+        dashboard: `dashboard@${domain}/dashboard/latest/remoteEntry.js`,
       },
       shared: packageJson.dependencies,
     }),

@@ -25,6 +25,8 @@ const devConfig = {
         marketing: 'marketing@http://localhost:8081/remoteEntry.js',
         // ALIAS: 'Auth_ModuleFederationPlugin.name@HOST:PORT/Auth_ModuleFederationPlugin.exposes[KEY_OF_FILE]'
         auth: 'auth@http://localhost:8082/remoteEntry.js',
+        // ALIAS: 'Dashboard_ModuleFederationPlugin.name@HOST:PORT/Dashboard_ModuleFederationPlugin.exposes[KEY_OF_FILE]'
+        dashboard: 'dashboard@http://localhost:8083/remoteEntry.js',
       },
       shared: packageJson.dependencies,
     }),
