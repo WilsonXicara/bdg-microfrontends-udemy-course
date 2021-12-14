@@ -7,6 +7,7 @@ import { LinearProgress } from './components/ui';
 
 const MarketingAppLazy = lazy(() => import('./components/remote-apps/MarketingApp'));
 const AuthAppLazy = lazy(() => import('./components/remote-apps/AuthApp'));
+const DashboardAppLazy = lazy(() => import('./components/remote-apps/DashboardApp'));
 
 const generateClassName = createGenerateClassName({
   productionPrefix: 'cnt-',  // Prefix for 'container'
@@ -24,6 +25,7 @@ export default () => {
             <Route path="/auth">
               <AuthAppLazy onSignIn={() => setIsSignedIn(true)} />
             </Route>
+            <Route path="/dashboard" component={DashboardAppLazy} />
             <Route path="/" component={MarketingAppLazy} />
           </Switch>
         </Suspense>
